@@ -9,7 +9,7 @@ class Student:
         self.credits = 0
 
     def get_age(self) -> datetime:
-        return (datetime.now() - self.dob) // 365
+        return (datetime.now() - self.dob).days // 365
 
     def add_credits(self, value):
         self.credits += value
