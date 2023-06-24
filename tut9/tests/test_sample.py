@@ -6,3 +6,4 @@ from tut9.myapp.sample import guess_number
 def test_guess_number(mock_roll_dice):
     mock_roll_dice.return_value = 3
     assert guess_number(3) == "You won!"
+    mock_roll_dice.assert_called()
