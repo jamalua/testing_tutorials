@@ -1,5 +1,6 @@
 from unittest import mock
 import pytest
+
 from tut9.myapp.sample import guess_number, get_ip
 
 
@@ -7,11 +8,13 @@ from tut9.myapp.sample import guess_number, get_ip
 @mock.patch("tut9.myapp.sample.roll_dice")
 def test_guess_number(mock_roll_dice, _input, expected):
     mock_roll_dice.return_value = 3
-    assert guess_number(3) == "You won!"
+    assert guess_number(_input) == expected
 
 
 @mock.patch("tut9.myapp.sample.requests.get")
 def test_get_ip(mock_requst_get):
-    mock_requst_get.status_code = 200
-    mock_requst_get.json.return_value = {"origin": "0.0.0.0"}
+    response_mock = mock.Mock()
+    response_mock.status_code = 200
+    response_mock.json.return_value = {"origin": "0.0.0.0"}
+    mock_requst_get.return_value = response_mock
     assert get_ip() == "0.0.0.0"
